@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // import axios from 'axios'
 
 import Rating from '../components/Rating'
-import { detailProducts } from '../actions/productActions'
+import { listProductDetails } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
@@ -15,22 +15,22 @@ const ProductScreen = ({ match, history }) => {
 
     const dispatch = useDispatch()
 
-    const productDetail = useSelector(state => state.productDetail)
-    const { error, loading, product } = productDetail
+    const productDetails = useSelector(state => state.productDetails)
+    const { error, loading, product } = productDetails
 
     useEffect(() => {
         // const fetchProduct = async () => {
-        //     const { data } = await axios(`/api/products/${match.params.pid}`)
+        //     const { data } = await axios(`/api/products/${match.params.id}`)
 
         //     setProduct(data)
         // }
         // fetchProduct()
 
-        dispatch(detailProducts(match.params.pid))
+        dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
 
     const addToCartHandler = () => {
-        history.push(`/cart/${match.params.pid}?qty=${qty}`)
+        history.push(`/cart/${match.params.id}?qty=${qty}`)
     }
 
     return (

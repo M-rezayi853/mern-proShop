@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 const CartScreen = ({ match, location, history }) => {
-    const productId = match.params.pid
+    const productId = match.params.id
 
     // ?qty=1
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
@@ -23,8 +23,8 @@ const CartScreen = ({ match, location, history }) => {
         }
     }, [dispatch, productId, qty])
 
-    const removeFromCartHandler = (pid) => {
-        dispatch(removeFromCart(pid))
+    const removeFromCartHandler = (id) => {
+        dispatch(removeFromCart(id))
     }
 
     const checkoutHandler = () => {

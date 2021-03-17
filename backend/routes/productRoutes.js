@@ -2,7 +2,8 @@ import express from 'express'
 // import asyncHandler from 'express-async-handler'
 // import Product from '../models/productModel.js'
 
-import { getProducts, getProductById } from '../controllers/prdouctController.js'
+import { getProducts, getProductById, deleteProduct, createProduct, updateProduct } from '../controllers/prdouctController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
@@ -11,11 +12,11 @@ const router = express.Router()
     
 //     res.json(products)
 // }))
-router.route('/').get(getProducts)
+router.route('/').get(getProducts).post(protect, admin, createProduct)
 
-// router.get('/:pid', asyncHandler(async (req, res) => {
-//     // const product = products.find(p => p._id === req.params.pid)
-//     const product = await Product.findById(req.params.pid)
+// router.get('/:id', asyncHandler(async (req, res) => {
+//     // const product = products.find(p => p._id === req.params.id)
+//     const product = await Product.findById(req.params.id)
 
 //     if(product) {
 //         res.json(product)
@@ -24,6 +25,6 @@ router.route('/').get(getProducts)
 //         throw new Error('Product not found')
 //     }
 // }))
-router.route('/:pid').get(getProductById)
+router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct)
 
 export default router
