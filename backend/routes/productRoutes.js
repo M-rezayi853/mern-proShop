@@ -2,7 +2,15 @@ import express from 'express'
 // import asyncHandler from 'express-async-handler'
 // import Product from '../models/productModel.js'
 
-import { getProducts, getProductById, deleteProduct, createProduct, updateProduct } from '../controllers/prdouctController.js'
+import { 
+    getProducts, 
+    getProductById, 
+    deleteProduct, 
+    createProduct, 
+    updateProduct,
+    createProductReview,
+    getTopProducts
+} from '../controllers/prdouctController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
@@ -25,6 +33,8 @@ router.route('/').get(getProducts).post(protect, admin, createProduct)
 //         throw new Error('Product not found')
 //     }
 // }))
+router.route('/top').get(getTopProducts)
 router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct)
+router.route('/:id/reviews').post(protect, createProductReview)
 
 export default router
