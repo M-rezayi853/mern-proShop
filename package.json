@@ -11,7 +11,7 @@
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd frontend && yarn run build --cwd frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": "https://github.com/M-rezayi853/mern-proShop.git",
   "author": "m_hazara_77 <mahdi.rezayi.853@gmail.com>",
